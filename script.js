@@ -8,18 +8,23 @@ const ropa = [
 ];
 
 const menu = [];
+let printedMenu;
 
-for (const item of ropa ) {
-    const newArray = [ item.id, item.color, item.tipo, item.talla ];
+function printingMenu () {
+    menu.splice(0, menu.length);
+    for (const item of ropa ) {
+        const newArray = [ item.id, item.color, item.tipo, item.talla ];
+    
+        menu.push("Prenda " + item.id + " - " + "color: " + item.color + ", de tipo: " + item.tipo + ", y talla: " + item.talla + ".");
+    } 
+    printedMenu = menu.join("\n");
+    console.log(printedMenu)
+}
 
-    menu.push("Prenda " + item.id + " - " + "color: " + item.color + ", de tipo: " + item.tipo + ", y talla: " + item.talla + ".");
-} 
-
-let printedMenu = menu.join("\n");
-console.log(printedMenu)
+printingMenu();
 
 class cloth {
-    constructor(id, color, tipo, talla) {
+    constructor(color, tipo, talla) {
         this.id = ropa.length + 1;
         this.color = colorInput;
         this.tipo = tipoInput;
@@ -34,7 +39,18 @@ let userSelection = prompt(
     printedMenu
 ); 
 
+
 let tipoInput = prompt("Por favor ingresa el tipo de prenda que entregaras, por ejemplo: 'Camiseta'");
 let colorInput = prompt("Por favor ingresa el color de prenda");
+let tallaInput = prompt("Por favor ingresa la talla de la prenda");
+
+ropa.push(new cloth(colorInput, tipoInput, tallaInput));
+ropa.splice (userSelection -1, 1);
+printingMenu();
+
+alert(
+    "Gracias! Ahora estos son las nuevas prendas con las que contamos. \n\n" +
+    printedMenu
+);
 
 
